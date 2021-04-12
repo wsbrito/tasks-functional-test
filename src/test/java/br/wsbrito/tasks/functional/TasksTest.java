@@ -1,12 +1,15 @@
 package br.wsbrito.tasks.functional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 	
@@ -21,12 +24,15 @@ public class TasksTest {
 	 * killall chromedriver
 	 **/
 	
-	public WebDriver getApplicationBrowser() {
+	public WebDriver getApplicationBrowser() throws MalformedURLException {
 		System.setProperty("webdriver.chrome.driver", "/home/wsbrito/Desenv/drivers/chromedriver");
-		WebDriver driver = new ChromeDriver();
+//		WebDriver driver = new ChromeDriver();
+		URL url = new URL("http://172.18.0.1:4444/wd/hub/");
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		WebDriver driver = new RemoteWebDriver(url,cap);
 		
 		// Acessa the main page of application
-		driver.navigate().to("http://localhost:8080/tasks/");
+		driver.navigate().to("http://192.168.0.109:8080/tasks/");
 		
 		// Configuring a wait strategy
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -34,7 +40,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void deveSalvarTarefaComSucesso() {
+	public void deveSalvarTarefaComSucesso() throws MalformedURLException {
 		
 		WebDriver driver = getApplicationBrowser();
 		try {
@@ -66,7 +72,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaComDataPassada() {
+	public void naoDeveSalvarTarefaComDataPassada() throws MalformedURLException {
 
 		WebDriver driver = getApplicationBrowser();
 		try {
@@ -98,7 +104,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemDescricao() {
+	public void naoDeveSalvarTarefaSemDescricao() throws MalformedURLException {
 
 		WebDriver driver = getApplicationBrowser();
 		try {
@@ -128,7 +134,7 @@ public class TasksTest {
 	}
 
 	@Test
-	public void naoDeveSalvarTarefaSemData() {
+	public void naoDeveSalvarTarefaSemData() throws MalformedURLException {
 
 		WebDriver driver = getApplicationBrowser();
 		try {
