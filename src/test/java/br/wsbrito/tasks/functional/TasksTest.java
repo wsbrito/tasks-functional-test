@@ -1,15 +1,13 @@
 package br.wsbrito.tasks.functional;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TasksTest {
 	
@@ -26,10 +24,10 @@ public class TasksTest {
 	
 	public WebDriver getApplicationBrowser() throws MalformedURLException {
 		System.setProperty("webdriver.chrome.driver", "/home/wsbrito/Desenv/drivers/chromedriver");
-//		WebDriver driver = new ChromeDriver();
-		URL url = new URL("http://172.18.0.1:4444/wd/hub/");
-		DesiredCapabilities cap = DesiredCapabilities.chrome();
-		WebDriver driver = new RemoteWebDriver(url,cap);
+		WebDriver driver = new ChromeDriver();
+//		URL url = new URL("http://172.18.0.1:4444/wd/hub/");
+//		DesiredCapabilities cap = DesiredCapabilities.chrome();
+//		WebDriver driver = new RemoteWebDriver(url,cap);
 		
 		// Acessa the main page of application
 		driver.navigate().to("http://192.168.0.109:8080/tasks/");
