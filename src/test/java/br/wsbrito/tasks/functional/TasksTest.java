@@ -31,6 +31,7 @@ public class TasksTest {
 		
 		// Acessa the main page of application
 		driver.navigate().to("http://192.168.0.109:8080/tasks/");
+		//driver.navigate().to("http://localhost:9999/tasks/");
 		
 		// Configuring a wait strategy
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
