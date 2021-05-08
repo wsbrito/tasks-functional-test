@@ -161,4 +161,48 @@ public class TasksTest {
 		
 	}
 	
+	@Test
+	public void deveExcluirTarefaComSucesso() throws MalformedURLException {
+		
+		WebDriver driver = getApplicationBrowser();
+		try {
+			
+			/**
+			 * Adding new task
+			 */
+			// Click on button "Add Todo"
+			// id="saveButton"
+			driver.findElement(By.id("addTodo")).click();
+			
+			// Fill "Task" - id="task"
+			driver.findElement(By.id("task")).sendKeys("Testing by Selenium");
+			
+			// Fill "Due Date" - id="dueDate"
+			driver.findElement(By.id("dueDate")).sendKeys("10/10/2021");
+			
+			// Click "Save" button - id="saveButton"
+			driver.findElement(By.id("saveButton")).click();
+			
+			// Verify "Sucess" messagem on screen - id="message"
+			String message = driver.findElement(By.id("message")).getText();
+			
+			// Validating message
+			Assert.assertEquals("Success!", message);
+			
+			/**
+			 * Removing task
+			 */
+			driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+			
+			message = driver.findElement(By.id("message")).getText();
+			
+			Assert.assertEquals("Success!", message);
+			
+		} finally {
+			// Close browser window
+			driver.quit();
+		}
+		
+	}
+	
 }
